@@ -1,7 +1,7 @@
 <template>
   <div class="container">
       <Header title="Task Tracker"/>
-      <Tasks @delete-task="deleteTask" :tasks="tasks"/>
+      <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
   
 </template>
@@ -28,25 +28,34 @@ export default {
       }
 
     },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => task.id === id ? {...task ,reminder : !task.reminder} : task)
+    },
   },
   created() {
     this.tasks = [
       {
         id: 1,
-        name: 'Turzo',
-        age: 23,
+        name: 'Hifz sura waqia first 20 ',
+        deadline: 'During 3 ramadan',
         reminder:true,
       },
       {
         id: 2,
-        name: 'Jony',
-        age: 23,
+        name: 'Read a tafsir of suar mulk',
+        deadline: 'During 3 ramadan',
         reminder:true,
       },
       {
         id: 3,
-        name: 'Arnob',
-        age: 23,
+        name: 'Read a political qna',
+        deadline: 'During 3 ramadan',
+        reminder:false,
+      },
+      {
+        id: 4,
+        name: 'Read a Halaka book',
+        deadline: 'During 3 ramadan',
         reminder:false,
       }
     ]
