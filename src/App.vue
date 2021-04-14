@@ -1,6 +1,7 @@
 <template>
   <div class="container">
       <Header title="Task Tracker"/>
+      <AddTask @add-task="addTask" />
       <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
   
@@ -9,12 +10,14 @@
 <script>
 import Header from "./components/Header";
 import Tasks from "@/components/Tasks";
+import AddTask from "@/components/AddTask";
 
 export default {
   name: 'App',
   components: {
     Header,
     Tasks,
+    AddTask
   },
   data(){
     return{
@@ -22,6 +25,10 @@ export default {
     }
   },
   methods:{
+    addTask(task){
+      console.log(task)
+      this.tasks = [...this.tasks,task]
+    },
     deleteTask(id) {
       if(confirm('Are you sure !!')){
         this.tasks = this.tasks.filter((task) => task.id !== id)
@@ -36,26 +43,26 @@ export default {
     this.tasks = [
       {
         id: 1,
-        name: 'Hifz sura waqia first 20 ',
-        deadline: 'During 3 ramadan',
+        text: 'Hifz sura waqia first 20 ',
+        day: 'During 3 ramadan',
         reminder:true,
       },
       {
         id: 2,
-        name: 'Read a tafsir of suar mulk',
-        deadline: 'During 3 ramadan',
+        text: 'Read a tafsir of suar mulk',
+        day: 'During 3 ramadan',
         reminder:true,
       },
       {
         id: 3,
-        name: 'Read a political qna',
-        deadline: 'During 3 ramadan',
+        text: 'Read a political qna',
+        day: 'During 3 ramadan',
         reminder:false,
       },
       {
         id: 4,
-        name: 'Read a Halaka book',
-        deadline: 'During 3 ramadan',
+        text: 'Read a Halaka book',
+        day: 'During 3 ramadan',
         reminder:false,
       }
     ]
